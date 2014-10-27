@@ -1,0 +1,18 @@
+cs:
+  spree:
+    customer_invoice: "Faktura"
+
+    invoice_print: "Tisk Faktury"
+    packaging_slip: "Dodací list"
+
+    invoice_logo_scale: "Velikost loga"
+    next_invoice_number: "Další číslo faktury"
+
+    invoice_number: "Číslo faktury:"
+    invoice_date: "Datum vystavení:"
+
+    ic: "IČ"
+    dic: "DIČ"
+    bank_account: "Číslo účtu"
+    footer_center: ""
+    supplier: "Dodavatel"

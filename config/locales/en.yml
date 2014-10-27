@@ -20,3 +20,9 @@ en:
 
     invoice_number: Invoice Number
     invoice_date: Invoice issued on
+
+    ic: "IC"
+    dic: "DIC"
+    bank_account: "Bank account"
+    footer_center: ""
+    supplier: "Supplier"

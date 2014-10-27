@@ -1,16 +1,10 @@
-SUMMARY
-=======
-
-This extension provides a "Print Invoice" button on the Admin Orders view screen which generates a PDF of the order details.
-
-
 INSTALLATION
 ============
 
 1. The gem relies only on the prawn gem, to install you need to add the following lines to your Gemfile
 
   ```ruby
-  gem 'spree_print_invoice' , github: 'spree/spree_print_invoice'
+  gem 'spree_print_invoice' , github: 'pbrazdil/spree_print_invoice'
   ```
 
 2. Run bundler
@@ -31,13 +25,13 @@ INSTALLATION
 Configuration
 ==============
 
-1. Set the logo path preference to include your store / company logo.
+1. Set the logo path preference to include your store / company logo. Logo must be within project assets.
 
   ```ruby
-  Spree::PrintInvoice::Config.set(print_invoice_logo_path: "/path/to/public/images/company-logo.png")
+  Spree::PrintInvoice::Config.set(print_invoice_logo_path: "logo/company-logo.png")
   ```
 
-2. Add your own own footer texts to the locale. The current footer works with `:footer_left1` , `:footer_left2` and `:footer_right1`, `:footer_right2` where the 1 version is on the left in bold, and the 2 version the "value" on the right.
+2. Add your own own footer texts to the locale. The current footer works with `:footer_center` 
 
 3. Override any of the partial templates. They are address, footer, totals, header, bye, and the line_items. In bye the text `:thanks` is printed. The `:extra_note` hook has been deprecated as Spree no longer supports hooks.
 
@@ -64,12 +58,19 @@ Configuration
   ```ruby
   Spree::PrintInvoice::Config.set(prawn_options: { page_layout: :landscape, page_size: "A4", margin: [50, 100, 150, 200] })
   ```
+  
+8. Set company details which will be printed on invoice.
+  ```ruby
+  Spree::PrintInvoice::Config.set(company_details = {
+                                        :name => '...',
+                                        :address => '...',
+                                        :city => '...',
+                                        :country => '...',
+                                        :ic => '...',
+                                        :dic => '...',
+                                        :bank_account => '...'
+                                    })
+  ```
 
-Plans
-=====
-Next receipts and then product related stuff with barcodes.
+9. In order to have support for unicode characters set your own `font_face` (into `print_invoice_font_face`) and `font_family` (into `print_invoice_font_family`).
 
-
-Contributions welcome
-
-Torsten

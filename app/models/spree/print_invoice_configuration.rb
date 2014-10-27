@@ -5,7 +5,9 @@ module Spree
     preference :print_invoice_logo_path, :string, :default => Spree::Config[:admin_interface_logo]
     preference :print_invoice_logo_scale, :integer, :default => 50
     preference :print_invoice_font_face, :string, :default => 'Helvetica'
+    preference :print_invoice_font_family, :hash, :default  => {}
     preference :print_buttons, :string, :default => 'invoice'
+    preference :company_details, :hash, :default => {}
     preference :prawn_options, :hash, :default => {}
 
     def use_sequential_number?

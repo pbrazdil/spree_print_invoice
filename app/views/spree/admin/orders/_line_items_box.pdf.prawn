@@ -1,18 +1,29 @@
 data = []
 
 if @hide_prices
-  @column_widths = { 0 => 100, 1 => 165, 2 => 75, 3 => 75 }
+  @column_widths = { 0 => 165, 1 => 75, 2 => 75 }
   @align = { 0 => :left, 1 => :left, 2 => :right, 3 => :right }
-  data << [Spree.t(:sku), Spree.t(:item_description), Spree.t(:options), Spree.t(:qty)]
+  data << [Spree.t(:item_description), Spree.t(:options), Spree.t(:qty)]
 else
-  @column_widths = { 0 => 75, 1 => 205, 2 => 75, 3 => 50, 4 => 75, 5 => 60 }
+  @column_widths = { 0 => 195, 1 => 55, 2 => 80, 3 => 80, 4 => 70, 5 => 60 }
   @align = { 0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right}
-  data << [Spree.t(:sku), Spree.t(:item_description), Spree.t(:options), Spree.t(:price), Spree.t(:qty), Spree.t(:total)]
+  data << [Spree.t(:item_description), Spree.t(:options), Spree.t(:price_without_tax), Spree.t(:price_with_tax), Spree.t(:qty), Spree.t(:total)]
 end
 
+
 @order.line_items.each do |item|
-  row = [ item.variant.product.sku, item.variant.product.name]
+  row = [
+    item.variant.product.name
+  ]
+
   row << item.variant.options_text
+
+  if item.pre_tax_amount.nil?
+    row << item.single_display_amount.to_s unless @hide_prices
+  else
+    row << Spree::Money.new(item.pre_tax_amount, { currency: item.currency }).to_s unless @hide_prices
+  end
+
   row << item.single_display_amount.to_s unless @hide_prices
   row << item.quantity
   row << item.display_total.to_s unless @hide_prices
